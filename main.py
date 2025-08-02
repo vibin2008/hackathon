@@ -4,6 +4,7 @@ from rentycars import app
 import tkinter as tk
 from tkinter import PhotoImage
 root=tk.Tk()
+client.init()
 username,password=app.signin(root,tk)
 print("Renty Carzz")
 print(username)
@@ -16,6 +17,11 @@ if a==str(1) or a==str(2):
     rep=app.rent_sell(root,tk)
     print(rep)
     if rep=="sell":
+        client.option("sell")
         info=app.sell()
         print(info)
+        client.sell(info)
+
+
+client.close()
     

@@ -1,8 +1,7 @@
 import socket
 import time
-
-def send(username,password):
-    # Create a socket object
+def init():
+    global client_socket
     client_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Connect to the server (use server IP address here)
@@ -12,7 +11,8 @@ def send(username,password):
     client_socket.connect((server_ip, server_port))
     print("connected to server!")
 
-    # Send message
+def send(username,password):
+    # Create a socket object
     client_socket.send(username.encode("utf-8"))
     client_socket.send(password.encode("utf-8"))
 
@@ -22,4 +22,16 @@ def send(username,password):
     return a,rep
 
     # Close the socket
+def option(op):
+    client_socket.send(op.encode("utf-8"))
+
+def sell(info):
+    ln=len(info)
+    client_socket.send(str(ln).encode("utf-8"))
+    for i in info:
+        client_socket.send(i.encode("utf-8"))
+        time.sleep(0.5)
+
+
+def close():
     client_socket.close()

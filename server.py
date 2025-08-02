@@ -1,5 +1,18 @@
 import socket
 from rentycars import database
+def option():
+    message = conn.recv(1024).decode("utf-8")
+    return message
+
+def sell():
+    data=[]
+    ln = conn.recv(1024).decode("utf-8")
+    ln=int(ln)
+    for i in range(ln):
+        info = conn.recv(1024).decode("utf-8")
+        data.append(info)
+    return data
+
 data=[]
 
 # Create a socket object
@@ -26,6 +39,11 @@ a,rep=database.signin(data[0],data[1])
 #sending reply to client
 conn.send(a.encode("utf-8"))
 conn.send(rep.encode("utf-8"))
+
+op=option()
+if op=="sell":
+    data=sell()
+    print(data)
 
 
 
