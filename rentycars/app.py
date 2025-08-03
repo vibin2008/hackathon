@@ -104,7 +104,8 @@ def sell():
         adhar_entry.place(x=400,y=210)
         typ=tk.Label(sell1,text="Vehical Type",font=("Script MT Bold",20,"bold"),pady=20,bg="black",fg="white")
         options = ["2 wheeler","4 wheeler"]
-        typ_entry = ttk.Combobox(sell1, values=options, state="readonly")
+        typ_entry = ttk.Combobox(sell1, values=options, state="readonly",font=("Times New Roman",20,"bold"),width=20)
+
         typ.place(x=100,y=300)
         typ_entry.place(x=400,y=310)
         brand=tk.Label(sell1,text="Brand",font=("Script MT Bold",20,"bold"),pady=20,bg="black",fg="white")
