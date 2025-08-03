@@ -19,7 +19,7 @@ data=[]
 server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to a host and port
-server_socket.bind(('192.168.1.114', 8080)) 
+server_socket.bind(('192.168.29.22', 8080)) 
 
 # Start listening
 
@@ -43,7 +43,7 @@ conn.send(rep.encode("utf-8"))
 op=option()
 if op=="sell":
     data=sell()
-    print(data)
+    database.sell(data)
 
 
 

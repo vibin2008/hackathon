@@ -26,12 +26,15 @@ def id():
         for j in i:
             rep.append(j)
     if str(rep[0])!=month:
-        cursor.execute("update id set month='"+month+"' and num=1 where month='"+str(rep[0])+"'")
+        cursor.execute("update id set month='"+str(month)+"',num='"+str(1)+"' where month='"+str(rep[0])+"'")
+        db.commit()
         id=id+year+month+'1'
     else:
         cursor.execute("update id set num='"+str(rep[1]+1)+"' where month='"+str(rep[0])+"'")
+        db.commit()
         num=str(rep[1]+1)
         id=id+year+month+num
+        print(id)
     return id
 
 
@@ -55,10 +58,13 @@ def signin(u,p):
         a='0'
         return a,"wrong password, \n if you are a new user the username is not avilable!"
 
-def sell(data): 
+def sell(data):
+    print(data) 
     tim=time.ctime()
+    print(tim)
     custid=id()  
-    cursor.execute("insert into sell values('"+custid+"','"+data[0]+"','"+str(data[1])+"','"+data[2]+"','"+data[3]+"','"+data[4]+"','"+data[5]+"','"+data[6]+"','"+str(tim)+"'")")
+    cursor.execute("insert into sell values('"+custid+"','"+data[0]+"','"+str(data[1])+"','"+data[2]+"','"+data[3]+"','"+data[4]+"','"+data[5]+"','"+data[6]+"','"+str(tim)+"')")
+    db.commit()
     print("registered succesfully!")   
 
     
