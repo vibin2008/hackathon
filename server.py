@@ -19,7 +19,7 @@ data=[]
 server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to a host and port
-server_socket.bind(('192.168.29.22', 8080)) 
+server_socket.bind(('192.168.1.114', 8080)) 
 
 # Start listening
 
