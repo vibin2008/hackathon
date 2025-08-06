@@ -79,7 +79,7 @@ def sell():
         
         data.append(nam.get())
         data.append(phone_num.get())
-        data.append(addres.get())
+        data.append(add_entry.get("1.0", tk.END))
         sell.destroy()
         sell1=tk.Tk()
         sell1.title("Renty Carzz")
@@ -147,11 +147,12 @@ def sell():
     phone.place(x=100,y=400)
     phone_entry.place(x=400,y=410)
     add=tk.Label(sell,text="Address",font=("Script MT Bold",20,"bold"),pady=20,bg="black",fg="white")
-    add_entry=tk.Entry(sell,textvariable=addres,font=("Times New Roman",20,"normal"))
+    add_entry = tk.Text(sell, height=5, width=30)
+    add_entry.place(x=400,y=500)
+    add_entry.insert(tk.END, "")
     add.place(x=100,y=500)
-    add_entry.place(x=400,y=510)
     button=tk.Button(sell,text="Proceed",command=clicked,font=("Cascadia Mono",20,"bold"))
-    button.place(x=500,y=600)
+    button.place(x=500,y=610)
     sell.mainloop()
     return data
 

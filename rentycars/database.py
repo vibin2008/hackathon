@@ -1,5 +1,6 @@
 import mysql.connector as mysql
 import time
+import pywhatkit
 global db
 global cursor
 # Establish the connection
@@ -30,12 +31,19 @@ def id():
         db.commit()
         id=id+year+month+'1'
     else:
-        cursor.execute("update id set num='"+str(rep[1]+1)+"' where month='"+str(rep[0])+"'")
+        rep[1]=int(rep[1])
+        rep[1]=rep[1]+1
+        cursor.execute("update id set num='"+str(rep[1])+"' where month='"+str(rep[0])+"'")
         db.commit()
-        num=str(rep[1]+1)
+        num=str(rep[1])
         id=id+year+month+num
         print(id)
     return id
+
+def otp(custid,otp):
+    cursor.execute("insert into otp values('"+custid+"','"+str(otp)+"') ")
+    db.commit()
+
 
 
 def signin(u,p):
@@ -65,7 +73,54 @@ def sell(data):
     custid=id()  
     cursor.execute("insert into sell values('"+custid+"','"+data[0]+"','"+str(data[1])+"','"+data[2]+"','"+data[3]+"','"+data[4]+"','"+data[5]+"','"+data[6]+"','"+str(tim)+"')")
     db.commit()
-    print("registered succesfully!")   
+    print("registered succesfully!")
+    return custid 
+
+def send(data):
+    import random
+    otp=random.randint(1111,9999)
+    otp_txt="OTP: "+str(otp)
+    f=open(r"C:\Users\VIBIN VIGNESH\Documents\programs\text.txt","w")
+    f.write("hello from RentyCarzz!\n")
+    f.write("your responce to sell has been recored SUCCESFULLY\n")
+    f.write("Details:\n")
+    text=["Name:","Phone:","Address:","Adharnumber:","Type:","Brand:","Model:"]
+    for i in range(len(text)):
+        text[i]=text[i]+str(data[i])
+        f.write(text[i])
+        f.write("\n")
+    f.write("Thank You!")
+    f.close()
+    import AppOpener as ap
+    import keyboard as key
+    f=open(r"C:\Users\VIBIN VIGNESH\Documents\programs\text.txt","r")
+    a=f.readlines()
+    ap.open("whatsapp")
+    time.sleep(1)
+    key.press_and_release("esc")
+    time.sleep(1)
+    key.write("8300242996")
+    time.sleep(1)
+    key.press_and_release("tab")
+    time.sleep(2)
+    key.press_and_release("enter")
+    time.sleep(2)
+    for i in a:
+        for j in i:
+            if j=="\n":
+                key.press_and_release("shift+enter")
+                time.sleep(1)
+            else:
+                key.write(j)
+    key.press_and_release("shift+enter")
+    time.sleep(1)
+    key.write(otp_txt)
+    key.press_and_release("enter")
+    time.sleep(3)
+    ap.close("whatsapp")
+    return otp
+
+
 
     
 
