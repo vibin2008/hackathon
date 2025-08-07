@@ -2,6 +2,20 @@ from PIL import Image,ImageTk
 import time
 import tkinter as tk
 from tkinter import ttk
+def logo():
+    root=tk.Tk()
+    root.title("Throttlers")
+    # Set geometry (widthxheight)
+    root.geometry('1000x1500')
+    img = Image.open("C:/Users/VIBIN VIGNESH/Documents/programs/hackathon/hackathon/logo.png")
+    img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+    background = ImageTk.PhotoImage(img)
+    back=tk.Label(root,image=background)
+    back.place(x=0,y=0,relwidth=1,relheight=1)
+    time.sleep(4)
+    #root.after(4000, lambda: print("Opening!"))
+    root.destroy()
+
 def signin(root,tk):
     username=""
     password=""
@@ -10,7 +24,7 @@ def signin(root,tk):
         username=name.get()
         password=pas.get()
         root.destroy()
-    root.title("Renty Carzz(sign in)")
+    root.title("Throttlers(sign in)")
     # Set geometry (widthxheight)
     root.geometry('500x500')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -20,7 +34,7 @@ def signin(root,tk):
     back.place(x=0,y=0,relwidth=1,relheight=1)
     name=tk.StringVar()
     pas=tk.StringVar()
-    comp=tk.Label(root,text="Renty Carzz",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(root,text="Throttlers",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
                   height=2,width=30)
     comp.pack()
     user = tk.Label(root, text = 'Username', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
@@ -38,7 +52,7 @@ def signin(root,tk):
 
 #getting reply from server after sign in
 def signin_reply(root,tk,rep):
-    root.title("Renty Carzz(sign in)")
+    root.title("Throttlers(sign in)")
     # Set geometry (widthxheight)
     root.geometry('500x500')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -48,7 +62,7 @@ def signin_reply(root,tk,rep):
     back.place(x=0,y=0,relwidth=1,relheight=1)
     name=tk.StringVar()
     pas=tk.StringVar()
-    comp=tk.Label(root,text="Renty Carzz",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(root,text="Throttlers",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
                   height=2,width=30)
     comp.pack()
     user = tk.Label(root, text = 'Username', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
@@ -82,7 +96,7 @@ def sell():
         data.append(add_entry.get("1.0", tk.END))
         sell.destroy()
         sell1=tk.Tk()
-        sell1.title("Renty Carzz")
+        sell1.title("Throttlers")
         # Set geometry (widthxheight)
         sell1.geometry('1000x1500')
 
@@ -95,7 +109,7 @@ def sell():
         #typp=tk.StringVar()
         brnd=tk.StringVar()
         mod=tk.StringVar()
-        comp=tk.Label(sell1,text="Renty Carzz",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
+        comp=tk.Label(sell1,text="Throttlers",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
                       height=2,width=50)
         comp.pack()
         adhar=tk.Label(sell1,text="Adhar Number",font=("Script MT Bold",20,"bold"),pady=20,bg="black",fg="white")
@@ -122,7 +136,7 @@ def sell():
 
     
     sell=tk.Tk()
-    sell.title("Renty Carzz")
+    sell.title("Throttlers")
     # Set geometry (widthxheight)
     sell.geometry('1000x1500')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -133,7 +147,7 @@ def sell():
     nam=tk.StringVar()
     phone_num=tk.StringVar()
     addres=tk.StringVar()
-    comp=tk.Label(sell,text="Renty Carzz",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(sell,text="Throttlers",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
                   height=2,width=50)
     comp.pack()
     text = tk.Label(sell, text = 'fill in the requied details', font = ('Script MT Bold',25,'bold'),pady=20,bg="black",fg="white")
@@ -159,7 +173,7 @@ def sell():
 
 
 def rent_sell(root,tk):
-    root.title("Renty Carzz")
+    root.title("Throttlers")
     rep=""
     def sell_rep():
         root.destroy()

@@ -3,10 +3,11 @@ from rentycars import app
 # Import Module
 import tkinter as tk
 from tkinter import PhotoImage
+app.logo()
 root=tk.Tk()
 client.init()
 username,password=app.signin(root,tk)
-print("Renty Carzz")
+print("Throttlers")
 print(username)
 print(password)
 a,rep=client.send(username,password)
