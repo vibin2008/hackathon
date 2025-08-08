@@ -3,18 +3,23 @@ import time
 import tkinter as tk
 from tkinter import ttk
 def logo():
+    def close():
+        root.destroy()
+
     root=tk.Tk()
     root.title("Throttlers")
     # Set geometry (widthxheight)
-    root.geometry('1000x1500')
+    root.geometry('500x500')
     img = Image.open("C:/Users/VIBIN VIGNESH/Documents/programs/hackathon/hackathon/logo.png")
-    img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+    img = img.resize((500, 500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
     background = ImageTk.PhotoImage(img)
     back=tk.Label(root,image=background)
     back.place(x=0,y=0,relwidth=1,relheight=1)
-    time.sleep(4)
-    #root.after(4000, lambda: print("Opening!"))
-    root.destroy()
+    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="white",fg="dark blue",
+                  height=2,width=30)
+    comp.pack()
+    root.after(4000,close)
+    root.mainloop()
 
 def signin(root,tk):
     username=""
