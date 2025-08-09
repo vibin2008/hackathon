@@ -11,7 +11,11 @@ def sell():
     for i in range(ln):
         info = conn.recv(1024).decode("utf-8")
         data.append(info)
-    return data
+    num=conn.recv(1024).decode("utf-8")
+    case=conn.recv(1024).decode("utf-8")
+    return data,num,case
+
+
 
 data=[]
 
@@ -42,10 +46,14 @@ conn.send(rep.encode("utf-8"))
 
 op=option()
 if op=="sell":
-    data=sell()
+    data,num,case=sell()
     custid=database.sell(data)
-    otp=database.send(data)
+    database.enter(custid,num,case)
+    otp=database.send(data,num)
     database.otp(custid,otp)
+
+elif op=="close":
+    pass
 
 
 

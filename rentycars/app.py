@@ -202,31 +202,33 @@ def rent_sell(root,tk):
     return rep
 
 def case():
+    val=""
     def clicked():
-        val=typ_entry.get()
+        nonlocal val
+        value=typ_entry.get()
         op= [
     "Minor Traffic Violation",
     "Parking Violation",
     "Unpaid Traffic Fine",
     "Unpaid Parking Fine","Expired Documents (Insurance / PUC / Road Tax)",
     "Past Accident Case"]
-        if val in op:
+        if value in op:
             root.destroy()
-            return val
+            val=value
         else:
             from tkinter import messagebox
             messagebox.showerror("Throttlers", "Your responce has been rejected due to the case registed on your vehical")
-            root.destoy()
-            return "case"
+            root.destroy()
+            val="case"
 
     root=tk.Tk()
     root.title("Throttlers")
     # Set geometry (widthxheight)
-    root.geometry('500x300')
+    root.geometry('500x400')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
     img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
     background = ImageTk.PhotoImage(img)
-    back=tk.Label(sell,image=background)
+    back=tk.Label(root,image=background)
     back.place(x=0,y=0,relwidth=1,relheight=1)
     plate=tk.StringVar()
     comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
@@ -255,25 +257,29 @@ def case():
     button=tk.Button(root,text="Proceed",command=clicked,font=("Cascadia Mono",20,"bold"))
     button.pack(pady=20)
     root.mainloop()
+    return val
 
 
 def num_plate():
+    number=""
+    val=""
     def clicked():
         from tkinter import messagebox
+        nonlocal number
+        nonlocal val
         answer = messagebox.askyesno("Vehicle Check", "Is there any case registered on this car?")
-        if answer=="yes":
+        if answer:
             number=plate.get()
             root.destroy()
             val=case()
-            return number,val
         else:
             number=plate.get()
             root.destroy()
-            return number,"no"
+            val="no"
     root=tk.Tk()
     root.title("Throttlers")
     # Set geometry (widthxheight)
-    root.geometry('500x500')
+    root.geometry('500x400')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
     img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
     background = ImageTk.PhotoImage(img)
@@ -290,6 +296,7 @@ def num_plate():
     button=tk.Button(root,text="Proceed",command=clicked,font=("Cascadia Mono",20,"bold"))
     button.pack(pady=20)
     root.mainloop()
+    return number,val
 
 
 

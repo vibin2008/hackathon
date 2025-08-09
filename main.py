@@ -18,15 +18,16 @@ if a==str(1) or a==str(2):
     rep=app.rent_sell(root,tk)
     print(rep)
     if rep=="sell":
-        client.option("sell")
         info=app.sell()
         num,cas=app.num_plate()
         if cas=="case":
+            client.option("close")
             pass
         else:
+            client.option("sell")
             print(num,cas)
             print(info)
-            client.sell(info)
+            client.sell(info,num,cas)
 
 
 client.close()

@@ -76,12 +76,12 @@ def sell(data):
     print("registered succesfully!")
     return custid 
 
-def send(data):
+def send(data,num):
     import random
     otp=random.randint(1111,9999)
     otp_txt="OTP: "+str(otp)
     f=open(r"C:\Users\VIBIN VIGNESH\Documents\programs\text.txt","w")
-    f.write("hello from RentyCarzz!\n")
+    f.write("**hello from THROTTLERS**\n")
     f.write("your responce to sell has been recored SUCCESFULLY\n")
     f.write("Details:\n")
     text=["Name:","Phone:","Address:","Adharnumber:","Type:","Brand:","Model:"]
@@ -89,6 +89,9 @@ def send(data):
         text[i]=text[i]+str(data[i])
         f.write(text[i])
         f.write("\n")
+    num="Register Number:"+num
+    f.write(num)
+    f.write("\n")
     f.write("Thank You!")
     f.close()
     import AppOpener as ap
@@ -119,6 +122,11 @@ def send(data):
     time.sleep(3)
     ap.close("whatsapp")
     return otp
+
+def enter(custid,num,case):
+    cursor.execute("insert into legalcase value('"+custid+"','"+num+"','"+case+"')")
+    db.commit()
+    print("done succesfully")
 
 
 

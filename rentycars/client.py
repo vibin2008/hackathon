@@ -25,13 +25,16 @@ def send(username,password):
 def option(op):
     client_socket.send(op.encode("utf-8"))
 
-def sell(info):
+def sell(info,num,cas):
     ln=len(info)
     client_socket.send(str(ln).encode("utf-8"))
     time.sleep(0.5)
     for i in info:
         client_socket.send(i.encode("utf-8"))
         time.sleep(0.5)
+    client_socket.send(num.encode("utf-8"))
+    client_socket.send(cas.encode("utf-8"))
+    
 
 
 def close():
