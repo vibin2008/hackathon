@@ -28,6 +28,8 @@ if a==str(1) or a==str(2):
             print(num,cas)
             print(info)
             client.sell(info,num,cas)
+    elif rep=="rent":
+        app.rent()
 
 
 client.close()

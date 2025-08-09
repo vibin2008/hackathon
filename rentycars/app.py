@@ -185,6 +185,11 @@ def rent_sell(root,tk):
         nonlocal rep
         rep="sell"
     
+    def rent_rep():
+        root.destroy()
+        nonlocal rep
+        rep="rent"
+    
     # Set geometry (widthxheight)
     root.geometry('500x300')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -194,7 +199,7 @@ def rent_sell(root,tk):
     back.place(x=0,y=0,relwidth=1,relheight=1)
     text = tk.Label(root, text = 'What Do you want to do?', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
     text.pack()
-    rent=tk.Button(root,text="Rent a Vehical ",font=("Times New Roman",20,"bold"))
+    rent=tk.Button(root,text="Rent a Vehical ",command=rent_rep,font=("Times New Roman",20,"bold"))
     rent.pack(pady=20)
     sell=tk.Button(root,text="Sell a Vehical",command=sell_rep,font=("Times New Roman",20,"bold"))
     sell.pack(pady=20)
@@ -297,6 +302,56 @@ def num_plate():
     button.pack(pady=20)
     root.mainloop()
     return number,val
+
+def rent():
+    def four():
+        def proceed():
+            seat=typ_entry.get()
+            root.destroy()
+            print(seat)
+        root.destroy()
+        four=tk.Tk()
+        four.title("Throttlers")
+        # Set geometry (widthxheight)
+        four.geometry('500x500')
+        img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
+        img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+        background = ImageTk.PhotoImage(img)
+        back=tk.Label(four,image=background)
+        back.place(x=0,y=0,relwidth=1,relheight=1)
+        comp=tk.Label(four,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+                    height=2,width=50)
+        comp.pack()
+        que=tk.Label(four,text="what type of vehical do you prefer?",font=("Script MT Bold",20,"bold"),bg="black",fg="white")
+        que.pack(pady=20)
+        options=['5','8','12','17']
+        typ_entry = ttk.Combobox(four, values=options, state="readonly",font=("Times New Roman",20,"bold"),width=20)
+        typ_entry.pack(pady=20)
+        button=tk.Button(four,text="Proceed",command=proceed,font=("Times New Roman",20,"bold"))
+        button.pack(pady=20)
+        four.mainloop()
+
+
+    root=tk.Tk()
+    root.title("Throttlers")
+    # Set geometry (widthxheight)
+    root.geometry('500x500')
+    img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
+    img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+    background = ImageTk.PhotoImage(img)
+    back=tk.Label(root,image=background)
+    back.place(x=0,y=0,relwidth=1,relheight=1)
+    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+                  height=2,width=50)
+    comp.pack()
+    que=tk.Label(root,text="what type of vehical do you prefer?",font=("Script MT Bold",20,"bold"),bg="black",fg="white")
+    que.pack(pady=20)
+    two_wheel=tk.Button(root,text="Two Wheeler",font=("Times New Roman",20,"bold"))
+    two_wheel.pack(pady=20)
+    four_wheel=tk.Button(root,text="Four Wheeler",command=four,font=("Times New Roman",20,"bold"))
+    four_wheel.pack(pady=20)
+    root.mainloop()
+
 
 
 
