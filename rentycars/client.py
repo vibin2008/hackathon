@@ -28,6 +28,7 @@ def option(op):
 def sell(info):
     ln=len(info)
     client_socket.send(str(ln).encode("utf-8"))
+    time.sleep(0.5)
     for i in info:
         client_socket.send(i.encode("utf-8"))
         time.sleep(0.5)

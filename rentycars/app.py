@@ -39,7 +39,7 @@ def signin(root,tk):
     back.place(x=0,y=0,relwidth=1,relheight=1)
     name=tk.StringVar()
     pas=tk.StringVar()
-    comp=tk.Label(root,text="Throttlers",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                   height=2,width=30)
     comp.pack()
     user = tk.Label(root, text = 'Username', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
@@ -67,7 +67,7 @@ def signin_reply(root,tk,rep):
     back.place(x=0,y=0,relwidth=1,relheight=1)
     name=tk.StringVar()
     pas=tk.StringVar()
-    comp=tk.Label(root,text="Throttlers",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                   height=2,width=30)
     comp.pack()
     user = tk.Label(root, text = 'Username', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
@@ -114,7 +114,7 @@ def sell():
         #typp=tk.StringVar()
         brnd=tk.StringVar()
         mod=tk.StringVar()
-        comp=tk.Label(sell1,text="Throttlers",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
+        comp=tk.Label(sell1,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                       height=2,width=50)
         comp.pack()
         adhar=tk.Label(sell1,text="Adhar Number",font=("Script MT Bold",20,"bold"),pady=20,bg="black",fg="white")
@@ -152,7 +152,7 @@ def sell():
     nam=tk.StringVar()
     phone_num=tk.StringVar()
     addres=tk.StringVar()
-    comp=tk.Label(sell,text="Throttlers",font=("Cascadia Mono",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(sell,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                   height=2,width=50)
     comp.pack()
     text = tk.Label(sell, text = 'fill in the requied details', font = ('Script MT Bold',25,'bold'),pady=20,bg="black",fg="white")
@@ -200,6 +200,100 @@ def rent_sell(root,tk):
     sell.pack(pady=20)
     root.mainloop()
     return rep
+
+def case():
+    def clicked():
+        val=typ_entry.get()
+        op= [
+    "Minor Traffic Violation",
+    "Parking Violation",
+    "Unpaid Traffic Fine",
+    "Unpaid Parking Fine","Expired Documents (Insurance / PUC / Road Tax)",
+    "Past Accident Case"]
+        if val in op:
+            root.destroy()
+            return val
+        else:
+            from tkinter import messagebox
+            messagebox.showerror("Throttlers", "Your responce has been rejected due to the case registed on your vehical")
+            root.destoy()
+            return "case"
+
+    root=tk.Tk()
+    root.title("Throttlers")
+    # Set geometry (widthxheight)
+    root.geometry('500x300')
+    img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
+    img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+    background = ImageTk.PhotoImage(img)
+    back=tk.Label(sell,image=background)
+    back.place(x=0,y=0,relwidth=1,relheight=1)
+    plate=tk.StringVar()
+    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+                  height=2,width=50)
+    comp.pack()
+    cas=tk.Label(root,text="enter the case",font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
+    options = [
+    "Minor Traffic Violation",
+    "Parking Violation",
+    "Unpaid Traffic Fine",
+    "Unpaid Parking Fine",
+    "Active Accident Case",
+    "Hit-and-Run Case",
+    "Theft Case",
+    "Fraudulent Documents (Fake RC / Insurance / Number Plate)",
+    "Expired Documents (Insurance / PUC / Road Tax)",
+    "Smuggling or Illegal Transport Case",
+    "Pending Court Case involving the Vehicle",
+    "Manufacturer Recall (Safety Issue)",
+    "Past Accident Case"]
+
+    typ_entry = ttk.Combobox(root, values=options, state="readonly",font=("Times New Roman",20,"bold"),width=20)
+
+    cas.pack()
+    typ_entry.pack(pady=20)
+    button=tk.Button(root,text="Proceed",command=clicked,font=("Cascadia Mono",20,"bold"))
+    button.pack(pady=20)
+    root.mainloop()
+
+
+def num_plate():
+    def clicked():
+        from tkinter import messagebox
+        answer = messagebox.askyesno("Vehicle Check", "Is there any case registered on this car?")
+        if answer=="yes":
+            number=plate.get()
+            root.destroy()
+            val=case()
+            return number,val
+        else:
+            number=plate.get()
+            root.destroy()
+            return number,"no"
+    root=tk.Tk()
+    root.title("Throttlers")
+    # Set geometry (widthxheight)
+    root.geometry('500x500')
+    img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
+    img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+    background = ImageTk.PhotoImage(img)
+    back=tk.Label(root,image=background)
+    back.place(x=0,y=0,relwidth=1,relheight=1)
+    plate=tk.StringVar()
+    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+                  height=2,width=50)
+    comp.pack()
+    num = tk.Label(root, text = 'Reg.Number', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
+    num_entry = tk.Entry(root,textvariable = plate, font=('Times new Roman',20,'normal'))
+    num.pack()
+    num_entry.pack(pady=20)
+    button=tk.Button(root,text="Proceed",command=clicked,font=("Cascadia Mono",20,"bold"))
+    button.pack(pady=20)
+    root.mainloop()
+
+
+
+
 
     
 

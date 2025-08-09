@@ -20,8 +20,13 @@ if a==str(1) or a==str(2):
     if rep=="sell":
         client.option("sell")
         info=app.sell()
-        print(info)
-        client.sell(info)
+        num,cas=app.num_plate()
+        if cas=="case":
+            pass
+        else:
+            print(num,cas)
+            print(info)
+            client.sell(info)
 
 
 client.close()
