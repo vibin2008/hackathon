@@ -303,12 +303,28 @@ def num_plate():
     root.mainloop()
     return number,val
 
+def four_wheeler(seat):
+    root=tk.Tk()
+    root.title("Throttlers")
+    # Set geometry (widthxheight)
+    root.geometry('1000x1500')
+
+    img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
+    img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+    background = ImageTk.PhotoImage(img)
+    back=tk.Label(root,image=background)
+    back.place(x=0,y=0,relwidth=1,relheight=1)
+    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",height=2,width=50)
+    comp.pack()
+    root.mainloop()
+
+
 def rent():
     def four():
         def proceed():
             seat=typ_entry.get()
-            root.destroy()
-            print(seat)
+            four.destroy()
+            four_wheeler(seat)
         root.destroy()
         four=tk.Tk()
         four.title("Throttlers")
@@ -322,7 +338,7 @@ def rent():
         comp=tk.Label(four,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                     height=2,width=50)
         comp.pack()
-        que=tk.Label(four,text="what type of vehical do you prefer?",font=("Script MT Bold",20,"bold"),bg="black",fg="white")
+        que=tk.Label(four,text="How many Seats do you prefer?",font=("Script MT Bold",20,"bold"),bg="black",fg="white")
         que.pack(pady=20)
         options=['5','8','12','17']
         typ_entry = ttk.Combobox(four, values=options, state="readonly",font=("Times New Roman",20,"bold"),width=20)
