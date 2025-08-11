@@ -1,5 +1,6 @@
 import socket
 import time
+import pickle
 def init():
     global client_socket
     client_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,6 +35,15 @@ def sell(info,num,cas):
         time.sleep(0.5)
     client_socket.send(num.encode("utf-8"))
     client_socket.send(cas.encode("utf-8"))
+
+def rent(seat):
+    client_socket.send(seat.encode("utf-8"))
+    #data=client_socket.recv(1024).decode("utf-8")
+    data = client_socket.recv(4096)
+    data = pickle.loads(data)
+    return data
+
+
     
 
 

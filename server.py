@@ -1,4 +1,5 @@
 import socket
+import pickle
 from rentycars import database
 def option():
     message = conn.recv(1024).decode("utf-8")
@@ -51,6 +52,13 @@ if op=="sell":
     database.enter(custid,num,case)
     otp=database.send(data,num)
     database.otp(custid,otp)
+
+elif op=="rent":
+    seat = conn.recv(1024).decode("utf-8")
+    seat = seat+"seater"
+    data=database.rent(seat)
+    #conn.send(str(data).encode("utf-8"))
+    conn.sendall(pickle.dumps(data))
 
 elif op=="close":
     pass

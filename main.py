@@ -29,7 +29,10 @@ if a==str(1) or a==str(2):
             print(info)
             client.sell(info,num,cas)
     elif rep=="rent":
-        app.rent()
+        seat=app.rent()
+        client.option("rent")
+        data=client.rent(seat)
+        app.four_wheeler(data)
 
 
 client.close()

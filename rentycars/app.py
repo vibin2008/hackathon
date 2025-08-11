@@ -1,5 +1,6 @@
 from PIL import Image,ImageTk
-import time
+import requests
+import io
 import tkinter as tk
 from tkinter import ttk
 def logo():
@@ -7,7 +8,7 @@ def logo():
         root.destroy()
 
     root=tk.Tk()
-    root.title("Throttlers")
+    root.title("Carowna")
     # Set geometry (widthxheight)
     root.geometry('500x500')
     img = Image.open("C:/Users/VIBIN VIGNESH/Documents/programs/hackathon/hackathon/logo.png")
@@ -29,7 +30,7 @@ def signin(root,tk):
         username=name.get()
         password=pas.get()
         root.destroy()
-    root.title("Throttlers(sign in)")
+    root.title("Carowna(sign in)")
     # Set geometry (widthxheight)
     root.geometry('500x500')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -39,7 +40,7 @@ def signin(root,tk):
     back.place(x=0,y=0,relwidth=1,relheight=1)
     name=tk.StringVar()
     pas=tk.StringVar()
-    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(root,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                   height=2,width=30)
     comp.pack()
     user = tk.Label(root, text = 'Username', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
@@ -57,7 +58,7 @@ def signin(root,tk):
 
 #getting reply from server after sign in
 def signin_reply(root,tk,rep):
-    root.title("Throttlers(sign in)")
+    root.title("Carowna(sign in)")
     # Set geometry (widthxheight)
     root.geometry('500x500')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -67,7 +68,7 @@ def signin_reply(root,tk,rep):
     back.place(x=0,y=0,relwidth=1,relheight=1)
     name=tk.StringVar()
     pas=tk.StringVar()
-    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(root,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                   height=2,width=30)
     comp.pack()
     user = tk.Label(root, text = 'Username', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
@@ -101,7 +102,7 @@ def sell():
         data.append(add_entry.get("1.0", tk.END))
         sell.destroy()
         sell1=tk.Tk()
-        sell1.title("Throttlers")
+        sell1.title("Carowna")
         # Set geometry (widthxheight)
         sell1.geometry('1000x1500')
 
@@ -114,7 +115,7 @@ def sell():
         #typp=tk.StringVar()
         brnd=tk.StringVar()
         mod=tk.StringVar()
-        comp=tk.Label(sell1,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+        comp=tk.Label(sell1,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                       height=2,width=50)
         comp.pack()
         adhar=tk.Label(sell1,text="Adhar Number",font=("Script MT Bold",20,"bold"),pady=20,bg="black",fg="white")
@@ -141,7 +142,7 @@ def sell():
 
     
     sell=tk.Tk()
-    sell.title("Throttlers")
+    sell.title("Carowna")
     # Set geometry (widthxheight)
     sell.geometry('1000x1500')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -152,7 +153,7 @@ def sell():
     nam=tk.StringVar()
     phone_num=tk.StringVar()
     addres=tk.StringVar()
-    comp=tk.Label(sell,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(sell,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                   height=2,width=50)
     comp.pack()
     text = tk.Label(sell, text = 'fill in the requied details', font = ('Script MT Bold',25,'bold'),pady=20,bg="black",fg="white")
@@ -222,12 +223,12 @@ def case():
             val=value
         else:
             from tkinter import messagebox
-            messagebox.showerror("Throttlers", "Your responce has been rejected due to the case registed on your vehical")
+            messagebox.showerror("Carowna", "Your responce has been rejected due to the case registed on your vehical")
             root.destroy()
             val="case"
 
     root=tk.Tk()
-    root.title("Throttlers")
+    root.title("Carowna")
     # Set geometry (widthxheight)
     root.geometry('500x400')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -236,7 +237,7 @@ def case():
     back=tk.Label(root,image=background)
     back.place(x=0,y=0,relwidth=1,relheight=1)
     plate=tk.StringVar()
-    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(root,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                   height=2,width=50)
     comp.pack()
     cas=tk.Label(root,text="enter the case",font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
@@ -282,7 +283,7 @@ def num_plate():
             root.destroy()
             val="no"
     root=tk.Tk()
-    root.title("Throttlers")
+    root.title("Carowna")
     # Set geometry (widthxheight)
     root.geometry('500x400')
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -291,7 +292,7 @@ def num_plate():
     back=tk.Label(root,image=background)
     back.place(x=0,y=0,relwidth=1,relheight=1)
     plate=tk.StringVar()
-    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+    comp=tk.Label(root,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                   height=2,width=50)
     comp.pack()
     num = tk.Label(root, text = 'Reg.Number', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
@@ -303,31 +304,65 @@ def num_plate():
     root.mainloop()
     return number,val
 
-def four_wheeler(seat):
+def four_wheeler(data):
     root=tk.Tk()
-    root.title("Throttlers")
+    root.title("Carowna")
     # Set geometry (widthxheight)
     root.geometry('1000x1500')
+    canvas = tk.Canvas(root)
+    scrollbar = ttk.Scrollbar(root, orient="vertical", command=canvas.yview)
+    scrollable_frame = ttk.Frame(canvas)
+    scrollable_frame.bind(
+    "<Configure>",
+    lambda e: canvas.configure(
+        scrollregion=canvas.bbox("all")
+        )
+    )
+
+    # Place frame inside canvas
+    canvas_frame = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
 
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
     img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
     background = ImageTk.PhotoImage(img)
     back=tk.Label(root,image=background)
     back.place(x=0,y=0,relwidth=1,relheight=1)
-    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",height=2,width=50)
+    comp=tk.Label(root,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",height=2,width=50)
     comp.pack()
+    image_refs=[]
+    for i in data:
+        info=[]
+
+        for j in i:
+            info.append(j)
+        link=info[-1]
+        img_data = requests.get(link).content
+        img = Image.open(io.BytesIO(img_data))
+        img = img.resize((400, 250))  # Resize
+        tk_img = ImageTk.PhotoImage(img)
+        image=tk.Label(root,image=background)
+        image.pack(pady=(10, 2), anchor="w")
+        image_refs.append(tk_img)
+
+
+        label = tk.Label(scrollable_frame, image=tk_img)
+        label.pack(pady=10)
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
     root.mainloop()
 
 
 def rent():
+    seat=""
     def four():
         def proceed():
+            nonlocal seat
             seat=typ_entry.get()
             four.destroy()
-            four_wheeler(seat)
         root.destroy()
         four=tk.Tk()
-        four.title("Throttlers")
+        four.title("Carowna")
         # Set geometry (widthxheight)
         four.geometry('500x500')
         img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
@@ -335,7 +370,7 @@ def rent():
         background = ImageTk.PhotoImage(img)
         back=tk.Label(four,image=background)
         back.place(x=0,y=0,relwidth=1,relheight=1)
-        comp=tk.Label(four,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
+        comp=tk.Label(four,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",
                     height=2,width=50)
         comp.pack()
         que=tk.Label(four,text="How many Seats do you prefer?",font=("Script MT Bold",20,"bold"),bg="black",fg="white")
@@ -367,6 +402,7 @@ def rent():
     four_wheel=tk.Button(root,text="Four Wheeler",command=four,font=("Times New Roman",20,"bold"))
     four_wheel.pack(pady=20)
     root.mainloop()
+    return seat
 
 
 

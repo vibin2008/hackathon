@@ -128,6 +128,15 @@ def enter(custid,num,case):
     db.commit()
     print("done succesfully")
 
+def rent(seat):
+    data=[]
+    cursor.execute(f"select * from {seat}")
+    res=cursor.fetchall()
+    for i in res:
+        data.append(i)
+    return data
+
+
 
 
     
