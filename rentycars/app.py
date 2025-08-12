@@ -333,11 +333,14 @@ def four_wheeler(data):
     # Pack canvas and scrollbar
     canvas.pack(side="left", fill="both", expand=True)
     scrollbar.pack(side="right", fill="y")
+    def _on_mousewheel(event):
+        canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+
+    canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
     image_refs=[]
     for i in data:
-        num=1
         info=[]
-
         for j in i:
             info.append(j)
         url=info[-1]
@@ -348,15 +351,32 @@ def four_wheeler(data):
         tk_img = ImageTk.PhotoImage(img)
         image_refs.append(tk_img)
 
-        # Create and pack label with image
-        label = tk.Label(scroll_frame, image=tk_img)
-        label.pack()
-        tk.Label(scroll_frame, text=f"Item {num+1}", font=("Arial", 14)).pack(pady=5)
-        num=num+1
+        seat="Seat:"+str(info[2])
+        rent="Rent per day:"+str(info[3])
+        data=seat+'\n'
+        data=data+rent+'\n'
+
+        car_frame = tk.Frame(scroll_frame, bg="white", bd=2, relief="groove")
+        car_frame.pack(pady=10, padx=20, fill="x")
+
+        # Image on the left
+        img_label = tk.Label(car_frame, image=tk_img)
+        img_label.pack(side="left", padx=10)
+
+        # Text on the right
+        text_frame = tk.Frame(car_frame, bg="white")
+        text_frame.pack(side="left", fill="both", expand=True)
+
+        name_label = tk.Label(text_frame, text=info[1], font=("Arial", 16, "bold"), bg="white", anchor="w")
+        name_label.pack(anchor="w",padx=10)
+
+        details_label = tk.Label(text_frame, text=data, font=("Arial", 14), bg="white", justify="left", anchor="w")
+        details_label.pack(anchor="w",padx=10)
 
 
 
-        
+    blank=tk.Label(scroll_frame, text="", font=("Arial", 14))
+    blank.pack(pady=5)    
     root.mainloop()
 
 
