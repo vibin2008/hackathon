@@ -307,20 +307,59 @@ def num_plate():
     return number,val
 
 def four_wheeler(data):
+    def click(Vehicle):
+        def selfdrive():
+            nonlocal Vehicle
+            root2.destroy()
+            root3=tk.Tk()
+            root3.title("Carowna")
+            # Set geometry (widthxheight)
+            root3.geometry('500x300')
+            img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
+            img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+            background = ImageTk.PhotoImage(img)
+            back=tk.Label(root3,image=background)
+            back.place(x=0,y=0,relwidth=1,relheight=1)
+            name="Vehicle Name:"+vehicle[0]
+            price="Rent per day:"+str(vehicle[-1])
+            driver="Driver: Self Drive"
+            fin=name+'\n'+price+'\n'+driver
+            enq = tk.Label(root3, text = fin, font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
+            conf = tk.Button(root3,text="Confirm",font = ('Times New Roman',20,'bold'))
+            enq.pack(pady=20)
+            conf.pack(pady=20)
 
+            root3.mainloop()
+
+        root.destroy()
+        root2=tk.Tk()
+        root2.title("Carowna")
+        # Set geometry (widthxheight)
+        root2.geometry('500x300')
+        img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
+        img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
+        background = ImageTk.PhotoImage(img)
+        back=tk.Label(root2,image=background)
+        back.place(x=0,y=0,relwidth=1,relheight=1)
+        enq = tk.Label(root2, text = 'What do you prefer?', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
+        driver = tk.Button(root2,text="Driver",font = ('Times New Roman',20,'bold'))
+        self=tk.Button(root2,text="Rent a Vehical ",command=selfdrive(),font=("Times New Roman",20,"bold"))
+        enq.pack(pady=20)
+        driver.pack(pady=20)
+        self.pack(pady=20)
+        root2.mainloop()
+        
+    
+    
+    from functools import partial
     root=tk.Tk()
     root.title("Carowna")
     # Set geometry (widthxheight)
     root.geometry('1000x1500')
-    img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
-    img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
-    background = ImageTk.PhotoImage(img)
-    back=tk.Label(root,image=background)
-    back.place(x=0,y=0,relwidth=1,relheight=1)
     comp=tk.Label(root,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",height=2,width=50)
     comp.pack()
     canvas = tk.Canvas(root, bg="lightgray")
-    scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
+    scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview,bg="black")
     # Create a frame inside the canvas
     scroll_frame = tk.Frame(canvas)
     scroll_frame.bind(
@@ -350,28 +389,24 @@ def four_wheeler(data):
         img = img.resize((200, 200), Image.Resampling.LANCZOS)
         tk_img = ImageTk.PhotoImage(img)
         image_refs.append(tk_img)
-
+        
+        name=info[1]
+        data=name+'\n'
         seat="Seat:"+str(info[2])
         rent="Rent per day:"+str(info[3])
-        data=seat+'\n'
+        data=data+seat+'\n'
         data=data+rent+'\n'
 
         car_frame = tk.Frame(scroll_frame, bg="white", bd=2, relief="groove")
         car_frame.pack(pady=10, padx=20, fill="x")
 
-        # Image on the left
-        img_label = tk.Label(car_frame, image=tk_img)
+        vehicle_id=[info[1],info[-2]]
+        img_label = tk.Button(car_frame, image=tk_img,command=partial(click,vehicle_id))
         img_label.pack(side="left", padx=10)
 
         # Text on the right
-        text_frame = tk.Frame(car_frame, bg="white")
+        text_frame = tk.Button(car_frame,text=data,bg="white",font=("Arial", 14),fg="black",command=partial(click,vehicle_id))
         text_frame.pack(side="left", fill="both", expand=True)
-
-        name_label = tk.Label(text_frame, text=info[1], font=("Arial", 16, "bold"), bg="white", anchor="w")
-        name_label.pack(anchor="w",padx=10)
-
-        details_label = tk.Label(text_frame, text=data, font=("Arial", 14), bg="white", justify="left", anchor="w")
-        details_label.pack(anchor="w",padx=10)
 
 
 

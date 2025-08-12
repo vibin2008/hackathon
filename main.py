@@ -2,7 +2,6 @@ from rentycars import client
 from rentycars import app
 # Import Module
 import tkinter as tk
-from tkinter import PhotoImage
 app.logo()
 root=tk.Tk()
 client.init()
