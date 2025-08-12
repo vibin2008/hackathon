@@ -1,6 +1,5 @@
 import mysql.connector as mysql
 import time
-import pywhatkit
 global db
 global cursor
 # Establish the connection
@@ -80,8 +79,9 @@ def send(data,num):
     import random
     otp=random.randint(1111,9999)
     otp_txt="OTP: "+str(otp)
+    phno=data[1]
     f=open(r"C:\Users\VIBIN VIGNESH\Documents\programs\text.txt","w")
-    f.write("**hello from THROTTLERS**\n")
+    f.write("**hello from Carowna**\n")
     f.write("your responce to sell has been recored SUCCESFULLY\n")
     f.write("Details:\n")
     text=["Name:","Phone:","Address:","Adharnumber:","Type:","Brand:","Model:"]
@@ -102,7 +102,7 @@ def send(data,num):
     time.sleep(1)
     key.press_and_release("esc")
     time.sleep(1)
-    key.write("8300242996")
+    key.write(str(phno))
     time.sleep(1)
     key.press_and_release("tab")
     time.sleep(2)

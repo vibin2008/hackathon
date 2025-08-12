@@ -1,8 +1,10 @@
 from PIL import Image,ImageTk
-import requests
-import io
 import tkinter as tk
 from tkinter import ttk
+import requests
+from PIL import Image
+from io import BytesIO
+import matplotlib.pyplot as plt
 def logo():
     def close():
         root.destroy()
@@ -16,7 +18,7 @@ def logo():
     background = ImageTk.PhotoImage(img)
     back=tk.Label(root,image=background)
     back.place(x=0,y=0,relwidth=1,relheight=1)
-    comp=tk.Label(root,text="Throttlers",font=("Comic Sans MS",30,"bold"),bg="white",fg="dark blue",
+    comp=tk.Label(root,text="Carwona",font=("Comic Sans MS",30,"bold"),bg="white",fg="dark blue",
                   height=2,width=30)
     comp.pack()
     root.after(4000,close)
@@ -305,24 +307,11 @@ def num_plate():
     return number,val
 
 def four_wheeler(data):
+
     root=tk.Tk()
     root.title("Carowna")
     # Set geometry (widthxheight)
     root.geometry('1000x1500')
-    canvas = tk.Canvas(root)
-    scrollbar = ttk.Scrollbar(root, orient="vertical", command=canvas.yview)
-    scrollable_frame = ttk.Frame(canvas)
-    scrollable_frame.bind(
-    "<Configure>",
-    lambda e: canvas.configure(
-        scrollregion=canvas.bbox("all")
-        )
-    )
-
-    # Place frame inside canvas
-    canvas_frame = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-    canvas.configure(yscrollcommand=scrollbar.set)
-
     img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
     img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
     background = ImageTk.PhotoImage(img)
@@ -330,26 +319,44 @@ def four_wheeler(data):
     back.place(x=0,y=0,relwidth=1,relheight=1)
     comp=tk.Label(root,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",height=2,width=50)
     comp.pack()
+    canvas = tk.Canvas(root, bg="lightgray")
+    scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
+    # Create a frame inside the canvas
+    scroll_frame = tk.Frame(canvas)
+    scroll_frame.bind(
+    "<Configure>",
+    lambda e: canvas.configure(
+        scrollregion=canvas.bbox("all")))
+    canvas.create_window((0, 0), window=scroll_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
+
+    # Pack canvas and scrollbar
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
     image_refs=[]
     for i in data:
+        num=1
         info=[]
 
         for j in i:
             info.append(j)
-        link=info[-1]
-        img_data = requests.get(link).content
-        img = Image.open(io.BytesIO(img_data))
-        img = img.resize((400, 250))  # Resize
+        url=info[-1]
+        response = requests.get(url)
+        img_data = response.content
+        img = Image.open(BytesIO(img_data))
+        img = img.resize((200, 200), Image.Resampling.LANCZOS)
         tk_img = ImageTk.PhotoImage(img)
-        image=tk.Label(root,image=background)
-        image.pack(pady=(10, 2), anchor="w")
         image_refs.append(tk_img)
 
+        # Create and pack label with image
+        label = tk.Label(scroll_frame, image=tk_img)
+        label.pack()
+        tk.Label(scroll_frame, text=f"Item {num+1}", font=("Arial", 14)).pack(pady=5)
+        num=num+1
 
-        label = tk.Label(scrollable_frame, image=tk_img)
-        label.pack(pady=10)
-    canvas.pack(side="left", fill="both", expand=True)
-    scrollbar.pack(side="right", fill="y")
+
+
+        
     root.mainloop()
 
 
