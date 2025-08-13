@@ -43,6 +43,12 @@ def rent(seat):
     data = pickle.loads(data)
     return data
 
+def driv(info):
+    client_socket.send(info.encode("utf-8"))
+    data = client_socket.recv(4096)
+    data = pickle.loads(data)
+    return data
+
 
     
 

@@ -136,6 +136,15 @@ def rent(seat):
         data.append(i)
     return data
 
+def driver():
+    data=[]
+    cursor.execute(f"select * from driver")
+    res=cursor.fetchall()
+    for i in res:
+        data.append(i)
+    return data
+
+
 
 
 

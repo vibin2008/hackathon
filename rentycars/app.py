@@ -342,9 +342,78 @@ def payment(vehicle):
     amount=vehicle[-1]*(20/100)
     qr("shreebhavankaarthik@oksbi",amount, name="Carowna")
 
+def drive():
+    from rentycars import client
+    from functools import partial
+    data=client.driv("driver")
+    from functools import partial
+    root=tk.Tk()
+    root.title("Carowna")
+    # Set geometry (widthxheight)
+    root.geometry('1000x1500')
+    comp=tk.Label(root,text="Carowna",font=("Comic Sans MS",30,"bold"),bg="black",fg="White",height=2,width=50)
+    comp.pack()
+    canvas = tk.Canvas(root, bg="lightgray")
+    scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview,bg="black")
+    # Create a frame inside the canvas
+    scroll_frame = tk.Frame(canvas)
+    scroll_frame.bind(
+    "<Configure>",
+    lambda e: canvas.configure(
+        scrollregion=canvas.bbox("all")))
+    canvas.create_window((0, 0), window=scroll_frame, anchor="nw")
+    canvas.configure(yscrollcommand=scrollbar.set)
+
+    # Pack canvas and scrollbar
+    canvas.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
+    def _on_mousewheel(event):
+        canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+
+    canvas.bind_all("<MouseWheel>", _on_mousewheel)
+
+    image_refs=[]
+    for i in data:
+        info=[]
+        for j in i:
+            info.append(j)
+        url=info[-1]
+        response = requests.get(url)
+        img_data = response.content
+        img = Image.open(BytesIO(img_data))
+        img = img.resize((200, 200), Image.Resampling.LANCZOS)
+        tk_img = ImageTk.PhotoImage(img)
+        image_refs.append(tk_img)
+        
+        name="Name: "+info[0]
+        rent="Rent: "+str(info[1])
+        rating="Rating Per Day: "+str(info[2])
+        data=name+'\n'+rent+'\n'+rating
+
+        car_frame = tk.Frame(scroll_frame, bg="white", bd=2, relief="groove")
+        car_frame.pack(pady=10, padx=20, fill="x")
+
+        vehicle_id=[info[1],info[-2]]
+        img_label = tk.Button(car_frame, image=tk_img)
+        img_label.pack(side="left", padx=10)
+
+        # Text on the right
+        text_frame = tk.Button(car_frame,text=data,bg="white",font=("Arial", 14),fg="black")
+        text_frame.pack(side="left", fill="both", expand=True)
+
+
+
+    blank=tk.Label(scroll_frame, text="", font=("Arial", 14))
+    blank.pack(pady=5)    
+    root.mainloop()
+    
+
 
 def four_wheeler(data):
     def click(Vehicle):
+        def driv(vehicle):
+            root2.destroy()
+            drive()
         def selfdrive(vehicle):
             def confirm(vehicle):
                 root3.destroy()
@@ -384,7 +453,7 @@ def four_wheeler(data):
         back=tk.Label(root2,image=background)
         back.place(x=0,y=0,relwidth=1,relheight=1)
         enq = tk.Label(root2, text = 'What do you prefer?', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
-        driver = tk.Button(root2,text="Driver",font = ('Times New Roman',20,'bold'))
+        driver = tk.Button(root2,text="Driver",command=lambda: driv(Vehicle),font = ('Times New Roman',20,'bold'))
         self=tk.Button(root2,text="Self Drive",command=lambda: selfdrive(Vehicle),font=("Times New Roman",20,"bold"))
         enq.pack(pady=20)
         driver.pack(pady=20)

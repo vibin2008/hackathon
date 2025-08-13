@@ -1,5 +1,6 @@
 import socket
 import pickle
+import time
 from rentycars import database
 def option():
     message = conn.recv(1024).decode("utf-8")
@@ -45,6 +46,11 @@ a,rep=database.signin(data[0],data[1])
 conn.send(a.encode("utf-8"))
 conn.send(rep.encode("utf-8"))
 
+def driv(info):
+    
+    print(seat)
+
+
 op=option()
 if op=="sell":
     data,num,case=sell()
@@ -59,6 +65,11 @@ elif op=="rent":
     data=database.rent(seat)
     #conn.send(str(data).encode("utf-8"))
     conn.sendall(pickle.dumps(data))
+    time.sleep(5)
+    info = conn.recv(1024).decode("utf-8")
+    if info=="driver":
+        data=database.driver()
+        conn.sendall(pickle.dumps(data))
 
 elif op=="close":
     pass
