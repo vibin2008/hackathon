@@ -306,27 +306,69 @@ def num_plate():
     root.mainloop()
     return number,val
 
+def payment(vehicle):
+    import qrcode
+    import tkinter as tk
+    from PIL import ImageTk
+
+    def qr(upi_id, amount, name="Carowna Rentals"):
+        # Create UPI payment link
+        upi_link = f"upi://pay?pa={upi_id}&pn={name}&am={amount}&cu=INR"
+
+        # Generate QR code
+        qr = qrcode.QRCode(version=1, box_size=10, border=4)
+        qr.add_data(upi_link)
+        qr.make(fit=True)
+        img_qr = qr.make_image(fill_color="black", back_color="white")
+        img_qr.save("payment_qr.png")
+
+        # Show in Tkinter
+        qr_window = tk.Tk()
+        qr_window.title("Scan to Pay")
+        qr_window.geometry("500x500")
+
+        img_tk = ImageTk.PhotoImage(file="payment_qr.png")
+        enq = tk.Label(qr_window, text ="Pay your Advance Now! \U0001F600", font = ('Times New Roman',20,'bold'))
+        label = tk.Label(qr_window, text=f"Pay ₹{amount} to {name}", font=("Arial", 14,"bold"))
+        enq.pack()
+        label.pack(pady=10)
+
+        qr_label = tk.Label(qr_window, image=img_tk)
+        qr_label.image = img_tk
+        qr_label.pack(pady=20)
+
+        qr_window.mainloop()
+
+    amount=vehicle[-1]*(20/100)
+    qr("shreebhavankaarthik@oksbi",amount, name="Carowna")
+
+
 def four_wheeler(data):
     def click(Vehicle):
-        def selfdrive():
-            nonlocal Vehicle
+        def selfdrive(vehicle):
+            def confirm(vehicle):
+                root3.destroy()
+                payment(vehicle)
             root2.destroy()
             root3=tk.Tk()
             root3.title("Carowna")
             # Set geometry (widthxheight)
-            root3.geometry('500x300')
+            root3.geometry('500x400')
             img = Image.open("C:/Users/VIBIN VIGNESH/Pictures/back.png")
             img = img.resize((1500, 1500), Image.Resampling.LANCZOS)   # LANCZOS is used to resize the image with good quality
             background = ImageTk.PhotoImage(img)
             back=tk.Label(root3,image=background)
             back.place(x=0,y=0,relwidth=1,relheight=1)
-            name="Vehicle Name:"+vehicle[0]
-            price="Rent per day:"+str(vehicle[-1])
+            name="Vehicle Name: "+vehicle[0]
+            price="Rent per day: "+str(vehicle[-1])
             driver="Driver: Self Drive"
+            advance="Advnance Ammount: "+str(vehicle[-1]*(20/100))
             fin=name+'\n'+price+'\n'+driver
-            enq = tk.Label(root3, text = fin, font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
-            conf = tk.Button(root3,text="Confirm",font = ('Times New Roman',20,'bold'))
+            enq = tk.Label(root3, text = fin, font = ('Times New Roman',20,'bold'),pady=20,bg="black",fg="white")
+            adv = tk.Label(root3, text = advance, font = ('Times New Roman',20,'bold'),pady=20,bg="black",fg="yellow")
+            conf = tk.Button(root3,text="Confirm",command=lambda: confirm(Vehicle),font = ('Times New Roman',20,'bold'))
             enq.pack(pady=20)
+            adv.pack()
             conf.pack(pady=20)
 
             root3.mainloop()
@@ -343,7 +385,7 @@ def four_wheeler(data):
         back.place(x=0,y=0,relwidth=1,relheight=1)
         enq = tk.Label(root2, text = 'What do you prefer?', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
         driver = tk.Button(root2,text="Driver",font = ('Times New Roman',20,'bold'))
-        self=tk.Button(root2,text="Rent a Vehical ",command=selfdrive(),font=("Times New Roman",20,"bold"))
+        self=tk.Button(root2,text="Self Drive",command=lambda: selfdrive(Vehicle),font=("Times New Roman",20,"bold"))
         enq.pack(pady=20)
         driver.pack(pady=20)
         self.pack(pady=20)
