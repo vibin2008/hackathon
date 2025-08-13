@@ -386,8 +386,8 @@ def drive():
         image_refs.append(tk_img)
         
         name="Name: "+info[0]
-        rent="Rent: "+str(info[1])
-        rating="Rating Per Day: "+str(info[2])
+        rent="Rent Per Day: "+str(info[1])
+        rating="Rating: "+str(info[2])
         data=name+'\n'+rent+'\n'+rating
 
         car_frame = tk.Frame(scroll_frame, bg="white", bd=2, relief="groove")
