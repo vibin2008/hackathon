@@ -6,7 +6,7 @@ def init():
     client_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Connect to the server (use server IP address here)
-    server_ip = '172.17.188.12'  # change this to your server's IP address
+    server_ip = '192.168.1.107'  # change this to your server's IP address
     server_port = 8080
 
     client_socket.connect((server_ip, server_port))
@@ -48,6 +48,14 @@ def driv(info):
     data = client_socket.recv(4096)
     data = pickle.loads(data)
     return data
+
+def upi():
+    info="upi"
+    client_socket.send(info.encode("utf-8"))
+    rep=client_socket.recv(1024).decode("utf-8")
+    return rep
+
+
 
 
     

@@ -25,7 +25,7 @@ data=[]
 server_socket=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to a host and port
-server_socket.bind(('172.17.188.12', 8080)) 
+server_socket.bind(('192.168.1.107', 8080)) 
 
 # Start listening
 
@@ -70,6 +70,9 @@ elif op=="rent":
     if info=="driver":
         data=database.driver()
         conn.sendall(pickle.dumps(data))
+    elif info=="upi":
+        upi="shreebhavankaarthik@oksbi"
+        conn.send(upi.encode("utf-8"))
 
 elif op=="close":
     pass

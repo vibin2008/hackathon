@@ -306,7 +306,7 @@ def num_plate():
     root.mainloop()
     return number,val
 
-def payment(vehicle):
+def payment(vehicle,upi):
     import qrcode
     import tkinter as tk
     from PIL import ImageTk
@@ -340,12 +340,11 @@ def payment(vehicle):
         qr_window.mainloop()
 
     amount=vehicle[-1]*(20/100)
-    qr("shreebhavankaarthik@oksbi",amount, name="Carowna")
+    qr(upi,amount, name="Carowna")
 
-def drive():
+def drive(data):
     from rentycars import client
     from functools import partial
-    data=client.driv("driver")
     from functools import partial
     root=tk.Tk()
     root.title("Carowna")
@@ -410,14 +409,17 @@ def drive():
 
 
 def four_wheeler(data):
-    def click(Vehicle):
-        def driv(vehicle):
+    val=""
+    def click(vehicle):
+        def driv():
             root2.destroy()
-            drive()
+            nonlocal val
+            val="drive"
         def selfdrive(vehicle):
             def confirm(vehicle):
                 root3.destroy()
-                payment(vehicle)
+                nonlocal val
+                val="self"
             root2.destroy()
             root3=tk.Tk()
             root3.title("Carowna")
@@ -435,7 +437,7 @@ def four_wheeler(data):
             fin=name+'\n'+price+'\n'+driver
             enq = tk.Label(root3, text = fin, font = ('Times New Roman',20,'bold'),pady=20,bg="black",fg="white")
             adv = tk.Label(root3, text = advance, font = ('Times New Roman',20,'bold'),pady=20,bg="black",fg="yellow")
-            conf = tk.Button(root3,text="Confirm",command=lambda: confirm(Vehicle),font = ('Times New Roman',20,'bold'))
+            conf = tk.Button(root3,text="Confirm",command=lambda: confirm(vehicle),font = ('Times New Roman',20,'bold'))
             enq.pack(pady=20)
             adv.pack()
             conf.pack(pady=20)
@@ -453,8 +455,8 @@ def four_wheeler(data):
         back=tk.Label(root2,image=background)
         back.place(x=0,y=0,relwidth=1,relheight=1)
         enq = tk.Label(root2, text = 'What do you prefer?', font = ('Script MT Bold',20,'bold'),pady=20,bg="black",fg="white")
-        driver = tk.Button(root2,text="Driver",command=lambda: driv(Vehicle),font = ('Times New Roman',20,'bold'))
-        self=tk.Button(root2,text="Self Drive",command=lambda: selfdrive(Vehicle),font=("Times New Roman",20,"bold"))
+        driver = tk.Button(root2,text="Driver",command=lambda: driv(),font = ('Times New Roman',20,'bold'))
+        self=tk.Button(root2,text="Self Drive",command=lambda: selfdrive(vehicle),font=("Times New Roman",20,"bold"))
         enq.pack(pady=20)
         driver.pack(pady=20)
         self.pack(pady=20)
@@ -524,6 +526,7 @@ def four_wheeler(data):
     blank=tk.Label(scroll_frame, text="", font=("Arial", 14))
     blank.pack(pady=5)    
     root.mainloop()
+    return vehicle_id,val
 
 
 def rent():

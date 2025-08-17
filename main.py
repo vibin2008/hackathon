@@ -31,7 +31,13 @@ if a==str(1) or a==str(2):
         seat=app.rent()
         client.option("rent")
         data=client.rent(seat)
-        app.four_wheeler(data)
+        vehicle,val=app.four_wheeler(data)
+        if val=="drive":
+            data=client.driv("driver")
+            app.drive(data)
+        elif val=="self":
+            upi=client.upi()
+            app.payment(vehicle,upi)
 
 
 client.close()
